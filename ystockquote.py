@@ -21,14 +21,14 @@ try:
     from urllib.parse import urlencode
 except ImportError:
     # py2
+    import urllib
     from urllib2 import Request, urlopen
     from urllib import urlencode
 
 
 def _request(symbol, stat):
     url = 'http://finance.yahoo.com/d/quotes.csv?s=%s&f=%s' % (symbol, stat)
-    req = Request(url)
-    resp = urlopen(req)
+    resp = urllib.urlopen(url)
     content = resp.read().decode().strip()
     return content
 
